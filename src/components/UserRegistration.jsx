@@ -15,7 +15,7 @@ class UserRegistration extends Component {
         super(props);
     
         this.state = {
-          user: {}
+          
         };
       }
     

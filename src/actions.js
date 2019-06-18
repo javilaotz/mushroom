@@ -15,6 +15,7 @@ export const addUser = user_data => async dispatch => {
   });
   try {
     const user = await Api.addUser(user_data);
+    console.log(user, "USER ADDED")
     dispatch({
       type: actionTypes.ADD_USER_SUCCESS,
       payload: user
@@ -38,6 +39,7 @@ export const getUsers = () => async dispatch => {
       payload: users
     });
   } catch (e) {
+    console.log(e, "VALOR DE E")
     dispatch({
       type: actionTypes.GET_USERS_FAILURE,
       payload: e

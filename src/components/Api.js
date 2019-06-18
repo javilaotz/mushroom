@@ -14,6 +14,7 @@ export const addUser = (data) => {
 export const getUsers = () => {
     const user_list = [...Users]
     return Promise.resolve(user_list)
+    //return Promise.reject(new Error("Problemas de conexion"))
 }
 
 //Adds a new Place

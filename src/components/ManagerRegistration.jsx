@@ -11,11 +11,11 @@ class ManagerRegistration extends Component {
 
     this.state = {
       manager: {},
-      users: []
+      users: {}
     };
   }
   componentDidMount = () => {
-    this.setState({ users: this.props.getUsers() });
+    this.props.getUsers()
   };
 
   handleChange = event => {
@@ -32,6 +32,10 @@ class ManagerRegistration extends Component {
     });
   };
   render() {
+    if (this.props.error) {
+      return "Error al cargar usuarios"
+    }
+
     return (
       <Form inline>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -44,7 +48,9 @@ class ManagerRegistration extends Component {
             id="users"
             placeholder="Users"
             onChange={this.handleChange}
-          >
+          >{
+            this.props.users.map(user => <option>{user.name}</option>)
+          }
             <option>1</option>
           </Input>
         </FormGroup>
@@ -56,7 +62,7 @@ class ManagerRegistration extends Component {
   }
 }
 
-const mapStateToProps = state => ({}); //adaptador state component
+const mapStateToProps = state => ({users: state.users.entries, error:state.users.error}); //adaptador state component
 
 export default connect(
   mapStateToProps,

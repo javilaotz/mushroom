@@ -5,7 +5,7 @@ const initialState = {
     isFetched: false,
     entries: []
   },
-  filter: 'all'
+  places: []
 };
 
 export default (state = initialState, action) => {
@@ -15,18 +15,23 @@ export default (state = initialState, action) => {
     case actionTypes.ADD_USER_REQUEST:
       return state;
     case actionTypes.ADD_USER_SUCCESS:
+      console.log(action.payload, "PAYLOAD FROM ADD")
       return {
-        ...state, users: [...state.users.entries, action.payload]  };
+        ...state, users: {...state.users, entries: [...state.users.entries, action.payload]}  };
     case actionTypes.ADD_USER_FAILURE:
       return state;
 
     case actionTypes.GET_USERS_REQUEST:
       return state;
     case actionTypes.GET_USERS_SUCCESS:
+      console.log(state, "ESTADO")
+      console.log(action.payload, "Payload")
       return {
-        ...state, users: [...state.users, action.payload]  };
+        ...state, users: {...state.users, entries:action.payload}};
     case actionTypes.GET_USERS_FAILURE:
-      return state; 
+      return {
+        ...state, users: {...state.users, error: action.payload}
+      }; 
 
     case actionTypes.ADD_PLACE_REQUEST:
       return state;

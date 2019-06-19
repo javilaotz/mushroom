@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Insert and List (Users, Places, Buildings, Managers)
 
 ## Pending
-Complete CRUD operations
-"sprout" in a place (booking concept)
-reports
++ Complete CRUD operations
++ "sprout" in a place (booking concept)
++ reports
 
 
 

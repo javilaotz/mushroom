@@ -1,17 +1,8 @@
-import React from 'react';
 import './App.css';
-import UserRegistration from './components/UserRegistration'
-import SpaceRegistration from './components/SpaceRegistration'
-import ManagerRegistration from './components/ManagerRegistration'
+import NavbarModule from "./components/NavbarModule";
 
 function App() {
-  return (
-    <div className="App">
-      <UserRegistration /> 
-      <SpaceRegistration />
-      <ManagerRegistration />
-    </div>
-  );
-}
+    return (<div className="App"> <NavbarModule/> </div>)
+    }
 
 export default App;

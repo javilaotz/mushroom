@@ -4,24 +4,26 @@ import {
     FormGroup,
     Label,
     Button,
-    Input } from 'reactstrap';
+    Input, Container } from 'reactstrap';
 import shortid from 'shortid';
 
 import { connect } from 'react-redux';
-import { addUser } from '../actions';
+import { addUser, getCareers } from '../actions';
   
 class UserRegistration extends Component {
     constructor(props) {
         super(props);
     
-        this.state = {
-          
-        };
+        this.state = {};
       }
     
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
+
+    componentDidMount = () => {
+        this.props.getCareers()
+    }
 
     handleAddUser = event => {
         event.preventDefault();
@@ -32,25 +34,22 @@ class UserRegistration extends Component {
             fullName: this.state.fullName
           });
     }
+
     render() {
+
     return (
-        <Form inline>
+        <Form>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="code" className="mr-sm-2">Code</Label>
-                <Input type="number" name="code" id="code" placeholder="Stude code" onChange={this.handleChange} />
+                <Input type="number" name="code" id="code" placeholder="User ID" onChange={this.handleChange} />
             </FormGroup>
-            <FormGroup className="mb-6 mr-sm-6 mb-sm-0">
-            <Label for="plan">Career Plan</Label>
+            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                 <Input type="select" name="plan" id="plan" onChange={this.handleChange}>
-                    <option>10004 - Name of Career #1 </option>
-                    <option>10005 - Name of Career #2 </option>
-                    <option>10006 - Name of Career #3 </option>
-                    <option>10007 - Name of Career #4 </option>
-                    <option>10008 - Name of Career #5 </option>
+                    {
+                        this.props.careerList.map(career => <option key={career.id}>{career.name}</option>)
+                    }
                 </Input>
             </FormGroup>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="fullName" className="mr-sm-2">Name</Label>
                 <Input type="text" name="fullName" id="fullName" placeholder="Full Name" onChange={this.handleChange} />
             </FormGroup>
             <Button onClick={this.handleAddUser} color="success">Save</Button>
@@ -59,9 +58,9 @@ class UserRegistration extends Component {
     }
 }
 
-const mapStateToProps = state => ({}); //adaptador state component
+const mapStateToProps = state => ({careerList: state.careerList.entries}); //adaptador state component
 
 export default connect(
   mapStateToProps,
-  { onSubmit: addUser }
+  { onSubmit: addUser, getCareers }
 )(UserRegistration); //HOC, conectando redux con el componente (curry pattern)

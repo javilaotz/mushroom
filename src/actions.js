@@ -15,7 +15,6 @@ export const addUser = user_data => async dispatch => {
   });
   try {
     const user = await Api.addUser(user_data);
-    console.log(user, "USER ADDED")
     dispatch({
       type: actionTypes.ADD_USER_SUCCESS,
       payload: user
@@ -39,7 +38,6 @@ export const getUsers = () => async dispatch => {
       payload: users
     });
   } catch (e) {
-    console.log(e, "VALOR DE E")
     dispatch({
       type: actionTypes.GET_USERS_FAILURE,
       payload: e
@@ -78,6 +76,42 @@ export const addPlace = space_data => async dispatch => {
     } catch (e) {
       dispatch({
         type: actionTypes.ADD_MANAGER_FAILURE,
+        payload: e
+      });
+    }
+  };
+
+  export const getCareers = () => async dispatch => {
+    dispatch({
+      type: actionTypes.GET_CAREERS_REQUEST
+    });
+    try {
+      const careers = await Api.getCareers();
+      dispatch({
+        type: actionTypes.GET_CAREERS_SUCCESS,
+        payload: careers
+      });
+    } catch (e) {
+      dispatch({
+        type: actionTypes.GET_CAREERS_FAILURE,
+        payload: e
+      });
+    }
+  };
+
+  export const getBuildings = () => async dispatch => {
+    dispatch({
+      type: actionTypes.GET_BUILDINGS_REQUEST
+    });
+    try {
+      const buildings = await Api.getBuildings();
+      dispatch({
+        type: actionTypes.GET_BUILDINGS_SUCCESS,
+        payload: buildings
+      });
+    } catch (e) {
+      dispatch({
+        type: actionTypes.GET_BUILDINGS_FAILURE,
         payload: e
       });
     }

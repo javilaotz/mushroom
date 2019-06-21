@@ -3,7 +3,7 @@ import { Form, FormGroup, Label, Button, Input } from "reactstrap";
 import shortid from "shortid";
 
 import { connect } from "react-redux";
-import { addPlace } from "../actions";
+import { addPlace, getBuildings } from "../actions";
 
 class SpaceRegistration extends Component {
   constructor(props) {
@@ -12,6 +12,9 @@ class SpaceRegistration extends Component {
     this.state = {
       place: {}
     };
+  }
+  componentDidMount = () => {
+    this.props.getBuildings()
   }
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -28,11 +31,8 @@ class SpaceRegistration extends Component {
   };
   render() {
     return (
-      <Form inline>
+      <Form>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="door" className="mr-sm-2">
-            Place ID
-          </Label>
           <Input
             type="text"
             name="door"
@@ -41,20 +41,19 @@ class SpaceRegistration extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <FormGroup className="mb-6 mr-sm-6 mb-sm-0">
-          <Label for="building">Building</Label>
+        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Input
-            type="text"
+            type="select"
             name="building"
             id="building"
             placeholder="Building"
-            onChange={this.handleChange}
-          />
+            onChange={this.handleChange}>
+            {
+              this.props.buildings.map(building => <option key={building.id}>{building.name}</option>)
+            }
+          </Input>
         </FormGroup>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="placeName" className="mr-sm-2">
-            Place Name
-          </Label>
           <Input
             type="text"
             name="placeName"
@@ -64,9 +63,6 @@ class SpaceRegistration extends Component {
           />
         </FormGroup>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="category" className="mr-sm-2">
-            Category
-          </Label>
           <Input
             type="select"
             name="category"
@@ -91,9 +87,9 @@ class SpaceRegistration extends Component {
   }
 }
 
-const mapStateToProps = state => ({}); //adaptador state component
+const mapStateToProps = state => ({buildings: state.buildings.entries}); //adaptador state component
 
 export default connect(
   mapStateToProps,
-  { onSubmit: addPlace }
+  { onSubmit: addPlace, getBuildings }
 )(SpaceRegistration); //HOC, conectando redux con el componente (curry pattern)

@@ -37,11 +37,8 @@ class ManagerRegistration extends Component {
     }
 
     return (
-      <Form inline>
+      <Form>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="users" className="mr-sm-2">
-            Users
-          </Label>
           <Input
             type="select"
             name="users"
@@ -49,10 +46,18 @@ class ManagerRegistration extends Component {
             placeholder="Users"
             onChange={this.handleChange}
           >{
-            this.props.users.map(user => <option>{user.name}</option>)
+            this.props.users.map(user => <option key={user.id}>{user.fullName}</option>)
           }
-            <option>1</option>
           </Input>
+        </FormGroup>
+        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+          <Input
+            type="text"
+            name="users"
+            id="users"
+            placeholder="Users"
+            onChange={this.handleChange}
+          />
         </FormGroup>
         <Button onClick={this.handleAddPlace} color="success">
           Save

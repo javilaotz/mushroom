@@ -116,3 +116,9 @@ export const addPlace = space_data => async dispatch => {
       });
     }
   };
+
+  export const toggle = () => dispatch => {
+    dispatch({
+      type: actionTypes.TOGGLE_MODAL
+    });
+  }

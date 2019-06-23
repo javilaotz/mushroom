@@ -38,7 +38,7 @@ export default class NavbarModule extends React.Component {
     return (
       <Router>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/"><GiMushroomHouse/>MushRoom!</NavbarBrand>
+          <NavbarBrand to="/" href="#"><GiMushroomHouse className="mushRoomIco"/>MushRoom!</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

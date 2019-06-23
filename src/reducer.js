@@ -16,7 +16,8 @@ const initialState = {
   buildings: {
     entries: [],
     error: ""
-  }
+  },
+  modal: false
 };
 
 export default (state = initialState, action) => {
@@ -64,6 +65,9 @@ export default (state = initialState, action) => {
         ...state, buildings: {...state.buildings, entries: action.payload} };
     case actionTypes.GET_BUILDINGS_FAILURE:
       return state;
+
+    case actionTypes.TOGGLE_MODAL:
+      return { ...state, modal: !state.modal}
 
     default:
       return state;

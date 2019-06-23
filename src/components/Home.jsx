@@ -7,7 +7,9 @@ import NavbarModule from "./NavbarModule";
 export default class Home extends Component {
     render() {
         return (
-            <NavbarModule/>
+            <div>
+                Home component
+            </div>
         )
     }
 }
